@@ -1,0 +1,64 @@
+def creating_a_password():
+    password = input("Enter your password: ")
+
+    print("Length of your password is:", len(password))
+
+    if len(password) < 3 or len(password) > 15:
+        print("Your password is invalid")
+        exit()
+    else:
+        return password
+
+
+def is_password_valid(password):
+    CAPITAL_LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+                       "T", "U", "V", "W", "X", "Y", "Z"]
+    DIGIT = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    SPECIAL = ["!", "@", "#", "$", "%", "^", "&", "*"]
+
+    CAPITAL_LETTERS = any(c.isupper() for c in password)
+    DIGIT = any(c.isupper() for c in password)
+    SPECIAL = any(c.isdigit() for c in password)
+
+    if CAPITAL_LETTERS and DIGIT and SPECIAL:
+        print("Your password is valid")
+        return True
+    else:
+        print("Your password is invalid")
+        return False
+
+
+def tip_about_password():
+    print("Your password length should be: min. 3, max. 15\n "
+          "and have at least one: Special digit, number and CAPITAL LETTER")
+    print("Like: Dog123!")
+
+
+def main_menu():
+    current_password = None
+
+    while True:
+        print("\n===Welcome to Password Creator===")
+        print("1. Create a new password")
+        print("2. is password valid")
+        print("3. tip")
+        print("4. exit")
+
+        choice = int(input("Enter your choice: "))
+
+        match choice:
+            case 1:
+                current_password = creating_a_password()
+            case 2:
+                is_password_valid(current_password)
+            case 3:
+                tip_about_password()
+            case 4:
+                print("Exiting...")
+                exit()
+            case _:
+                print("Invalid choice")
+                return choice
+
+
+main_menu()
